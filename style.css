@@ -1,0 +1,1177 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f7f6; /* Light background for light mode */
+    color: #333;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Dark Mode */
+body.dark-mode {
+    background-color: #1a1a2e; /* Dark background for dark mode */
+    color: #e0e0e0;
+}
+
+body.dark-mode .sidebar {
+    background-color: #16213e;
+}
+
+body.dark-mode .sidebar .logo h1 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .sidebar .main-nav ul li a {
+    color: #e0e0e0;
+}
+
+body.dark-mode .sidebar .main-nav ul li.active a {
+    background-color: #0f3460;
+    color: #fff;
+}
+
+body.dark-mode .sidebar .main-nav ul li a:hover {
+    background-color: #0f3460;
+}
+
+body.dark-mode .content {
+    background-color: #1f4287; /* Darker content background */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .content h2 {
+    color: #e0e0e0;
+}
+
+body.dark-mode .user-profile-widget {
+    background-color: #16213e;
+    color: #e0e0e0;
+}
+
+body.dark-mode .user-profile-widget .dropdown-menu {
+    background-color: #16213e;
+    border: 1px solid #0f3460;
+}
+
+body.dark-mode .user-profile-widget .dropdown-menu a {
+    color: #e0e0e0;
+}
+
+body.dark-mode .user-profile-widget .dropdown-menu a:hover {
+    background-color: #0f3460;
+}
+
+body.dark-mode select,
+body.dark-mode input[type="text"],
+body.dark-mode input[type="password"],
+body.dark-mode textarea {
+    background-color: #2c3e50;
+    color: #e0e0e0;
+    border: 1px solid #0f3460;
+}
+
+body.dark-mode button {
+    background-color: #533483;
+    color: #fff;
+}
+
+body.dark-mode button:hover {
+    background-color: #3e2660;
+}
+
+body.dark-mode .auth-section {
+    background-color: #16213e;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .quran-text-display,
+body.dark-mode .azkar-display,
+body.dark-mode .hadith-display,
+body.dark-mode .prayer-times-display {
+    background-color: #2c3e50;
+    border: 1px solid #0f3460;
+}
+
+body.dark-mode .azkar-cat-btn {
+    background-color: #3e2660;
+    color: #e0e0e0;
+}
+
+body.dark-mode .azkar-cat-btn.active {
+    background-color: #533483;
+    color: #fff;
+}
+
+body.dark-mode .azkar-item {
+    background-color: #16213e;
+    border: 1px solid #0f3460;
+}
+
+body.dark-mode .azkar-counter {
+    background-color: #0f3460;
+    color: #fff;
+}
+
+body.dark-mode .modal-content {
+    background-color: #16213e;
+    color: #e0e0e0;
+}
+
+body.dark-mode .modal-content .close-button {
+    color: #e0e0e0;
+}
+
+body.dark-mode .contact-btn {
+    background-color: #533483;
+    color: #fff;
+}
+
+body.dark-mode .contact-btn:hover {
+    background-color: #3e2660;
+}
+
+body.dark-mode table {
+    background-color: #2c3e50;
+    color: #e0e0e0;
+    border: 1px solid #0f3460;
+}
+
+body.dark-mode th, body.dark-mode td {
+    border: 1px solid #0f3460;
+}
+
+/* Background Canvas */
+#backgroundCanvas {
+    position: fixed; /* Fixes the canvas in place even on scroll */
+    top: 0;
+    left: 0;
+    width: 100vw; /* 100% of viewport width */
+    height: 100vh; /* 100% of viewport height */
+    z-index: -1; /* Ensures the canvas is behind all other content */
+    background-color: #2c3e50; /* A dark background for golden elements */
+}
+
+/* Ensure other content appears above the canvas */
+body > *:not(#backgroundCanvas) {
+    position: relative;
+    z-index: 0;
+}
+
+/* Container Layout */
+.container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    position: relative; /* Needed for z-index to work correctly with sidebar/content */
+    z-index: 1; /* Ensures container is above canvas */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #34495e;
+    color: #fff;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Push footer to bottom */
+    position: fixed;
+    height: 100%;
+    overflow-y: auto; /* Enable scrolling for long nav lists */
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar .logo h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #f39c12;
+}
+
+.sidebar .main-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .main-nav ul li {
+    margin-bottom: 10px;
+}
+
+.sidebar .main-nav ul li a {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .main-nav ul li a i {
+    margin-left: 10px;
+    width: 20px; /* Ensure icon alignment */
+    text-align: center;
+}
+
+.sidebar .main-nav ul li a:hover {
+    background-color: #2c3e50;
+}
+
+.sidebar .main-nav ul li.active a {
+    background-color: #2c3e50;
+    color: #f39c12; /* Highlight active link */
+    font-weight: bold;
+}
+
+.sidebar-footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mode-toggle-btn {
+    background-color: #533483;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.mode-toggle-btn:hover {
+    background-color: #3e2660;
+}
+
+/* Main Content Area */
+.content {
+    margin-right: 250px; /* Offset for fixed sidebar */
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ecf0f1; /* Light content background */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+    min-height: 100vh;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-section {
+    display: none; /* Hidden by default, shown by JS */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.content-section h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f39c12;
+    padding-bottom: 10px;
+    text-align: right; /* RTL support */
+}
+
+/* User Profile Widget */
+.user-profile-widget {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 1000; /* High z-index to be on top */
+    transition: background-color 0.3s ease;
+}
+
+.user-profile-widget .user-avatar-small {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 10px; /* Spacing for RTL */
+}
+
+.user-profile-widget span {
+    font-weight: bold;
+    color: #333;
+}
+
+.user-profile-widget .dropdown-toggle-icon {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.user-profile-widget.active .dropdown-toggle-icon {
+    transform: rotate(180deg);
+}
+
+.user-profile-widget .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 180px;
+    padding: 10px 0;
+    display: none;
+    z-index: 1001; /* Ensure dropdown is above widget */
+}
+
+.user-profile-widget.active .dropdown-menu {
+    display: block;
+}
+
+.user-profile-widget .dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.2s ease;
+    text-align: right;
+}
+
+.user-profile-widget .dropdown-menu a:hover {
+    background-color: #f4f4f4;
+}
+
+.user-profile-widget .dropdown-menu a i {
+    margin-left: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Authentication Section */
+.auth-section {
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-form input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.auth-form button {
+    width: calc(50% - 10px);
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #28a745;
+    color: white;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.auth-form button:hover {
+    background-color: #218838;
+}
+
+.auth-form .message {
+    color: red;
+    margin-top: 15px;
+    font-weight: bold;
+}
+
+/* Quran Section */
+.quran-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.quran-controls select {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+    background-color: #f9f9f9;
+}
+
+.current-surah-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.current-surah-info span {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #f39c12;
+}
+
+.audio-player-container {
+    background-color: #f0f0f0;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#quranAudioPlayer {
+    width: 100%;
+    margin-bottom: 10px;
+    display: none; /* Hide native controls */
+}
+
+.custom-controls {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.custom-controls button {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.custom-controls button:hover {
+    background-color: #e67e22;
+}
+
+#progressBar {
+    flex-grow: 1;
+    height: 8px;
+    -webkit-appearance: none;
+    background: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+#progressBar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #f39c12;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#progressBar::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #f39c12;
+    cursor: pointer;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+
+#currentTimeDisplay, #durationDisplay {
+    font-size: 0.9em;
+    color: #555;
+    white-space: nowrap;
+}
+
+#downloadAudioBtn {
+    text-decoration: none;
+}
+
+#downloadAudioBtn button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+#downloadAudioBtn button:hover {
+    background-color: #2980b9;
+}
+
+.quran-text-display {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.2em;
+    line-height: 1.8;
+    text-align: justify;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.quran-text-display p {
+    margin-bottom: 10px;
+    text-indent: 1em;
+}
+
+.quran-text-display .bismillah {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 20px 0;
+    color: #2c3e50;
+}
+
+
+/* Azkar Section */
+.azkar-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.azkar-cat-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.azkar-cat-btn:hover {
+    background-color: #2980b9;
+}
+
+.azkar-cat-btn.active {
+    background-color: #f39c12;
+}
+
+.azkar-display {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.azkar-item {
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: right;
+}
+
+.azkar-item h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.3em;
+}
+
+.azkar-item .azkar-text {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+}
+
+.azkar-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.azkar-counter {
+    background-color: #f39c12;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.azkar-count-btn, .azkar-reset-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.azkar-reset-btn {
+    background-color: #dc3545;
+}
+
+.azkar-count-btn:hover {
+    background-color: #218838;
+}
+
+.azkar-reset-btn:hover {
+    background-color: #c82333;
+}
+
+
+/* Hadith Section */
+.hadith-search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.hadith-search-bar input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.hadith-search-bar button {
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.hadith-search-bar button:hover {
+    background-color: #e67e22;
+}
+
+.hadith-display {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.hadith-item {
+    background-color: #f0f0f0;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    text-align: justify;
+}
+
+.hadith-item p {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+}
+
+.hadith-item .source {
+    font-style: italic;
+    color: #666;
+    font-size: 0.9em;
+    text-align: left; /* Align source to left */
+}
+
+/* Prayer Times Section */
+.prayer-times-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.prayer-times-controls select {
+    flex-grow: 1;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+    background-color: #f9f9f9;
+}
+
+.prayer-times-controls button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.prayer-times-controls button:hover {
+    background-color: #2980b9;
+}
+
+.prayer-times-display {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.prayer-times-display table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.prayer-times-display th, .prayer-times-display td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+.prayer-times-display th {
+    background-color: #f39c12;
+    color: white;
+    font-weight: bold;
+}
+
+.prayer-times-display tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+/* Settings Section */
+.settings-group {
+    background-color: #f0f0f0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.settings-group h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.settings-group .input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.settings-group .input-group label {
+    flex-basis: 150px; /* Fixed width for labels */
+    font-weight: bold;
+    color: #555;
+    text-align: right; /* RTL support */
+}
+
+.settings-group .input-group input[type="text"],
+.settings-group .input-group input[type="password"],
+.settings-group .input-group input[type="file"] {
+    flex-grow: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.95em;
+    min-width: 150px; /* Allow input to shrink on small screens */
+}
+
+.settings-group .input-group button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.settings-group .input-group button:hover {
+    background-color: #0056b3;
+}
+
+.settings-group p.small-note {
+    font-size: 0.85em;
+    color: #777;
+    text-align: right;
+}
+
+/* Problem Report Section */
+.report-form .input-group {
+    margin-bottom: 15px;
+}
+
+.report-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    text-align: right;
+}
+
+.report-form input[type="text"],
+.report-form textarea {
+    width: calc(100% - 22px); /* Account for padding and border */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    resize: vertical; /* Allow vertical resizing for textarea */
+}
+
+.report-form button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.report-form button:hover {
+    background-color: #c82333;
+}
+
+.contact-info-display {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #e9f5ff;
+    border: 1px solid #b3d9ff;
+    border-radius: 8px;
+    text-align: center;
+    color: #004085;
+}
+
+body.dark-mode .contact-info-display {
+    background-color: #2c3e50;
+    border-color: #0f3460;
+    color: #e0e0e0;
+}
+
+.contact-info-display h3 {
+    color: #004085;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .contact-info-display h3 {
+    color: #f39c12;
+}
+
+.contact-info-display .contact-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.contact-info-display .contact-btn i {
+    margin-left: 10px;
+}
+
+.contact-info-display .whatsapp-btn {
+    background-color: #25D366;
+    color: white;
+}
+
+.contact-info-display .whatsapp-btn:hover {
+    background-color: #1DA851;
+    transform: translateY(-2px);
+}
+
+.contact-info-display .telegram-btn {
+    background-color: #0088CC;
+    color: white;
+}
+
+.contact-info-display .telegram-btn:hover {
+    background-color: #006FB3;
+    transform: translateY(-2px);
+}
+
+.contact-info-display .small-note {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 15px;
+}
+
+/* Modal Styles (Developer Info) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 80%; /* Could be responsive */
+    max-width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative;
+    text-align: right; /* RTL support */
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    border-bottom: 2px solid #f39c12;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.modal-content p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.modal-content p strong {
+    color: #f39c12;
+}
+
+.modal-content .close-button {
+    color: #aaa;
+    float: left; /* Position to top-left for RTL */
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.modal-content .close-button:hover,
+.modal-content .close-button:focus {
+    color: #000;
+    text-decoration: none;
+}
+
+.modal-content .contact-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px 5px 0 0; /* Adjust margin for RTL */
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.95em;
+    transition: background-color 0.3s ease;
+}
+
+.modal-content .email-contact-btn {
+    background-color: #3498db;
+    color: white;
+}
+.modal-content .email-contact-btn:hover {
+    background-color: #2980b9;
+}
+
+.modal-content .telegram-contact-btn {
+    background-color: #0088CC;
+    color: white;
+}
+.modal-content .telegram-contact-btn:hover {
+    background-color: #006FB3;
+}
+
+.modal-content .small-note {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 15px;
+    display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        padding-bottom: 10px;
+    }
+
+    .sidebar .main-nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .sidebar .main-nav ul li {
+        margin: 5px;
+    }
+
+    .sidebar .main-nav ul li a {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+
+    .content {
+        margin-right: 0; /* No offset needed */
+        padding-top: 70px; /* Space for the fixed user widget */
+    }
+
+    .user-profile-widget {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        justify-content: flex-end; /* Align to right */
+        padding: 8px 12px;
+        border-radius: 20px;
+    }
+
+    .user-profile-widget span {
+        display: none; /* Hide username on small screens */
+    }
+
+    .user-profile-widget .dropdown-menu {
+        top: calc(100% + 5px);
+        left: auto;
+        right: 0;
+        min-width: 150px;
+    }
+
+    .quran-controls, .prayer-times-controls, .hadith-search-bar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .quran-controls select, .prayer-times-controls select, .hadith-search-bar input {
+        width: 100%;
+    }
+
+    .custom-controls {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .custom-controls button {
+        flex-basis: 45%; /* Two buttons per row */
+    }
+
+    #progressBar {
+        order: -1; /* Move progress bar above buttons */
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #currentTimeDisplay, #durationDisplay {
+        font-size: 0.8em;
+    }
+
+    .auth-section {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    .auth-form button {
+        width: calc(100% - 10px); /* Full width buttons */
+        margin: 5px 0;
+    }
+
+    .settings-group .input-group {
+        flex-direction: column;
+        align-items: flex-end; /* Align to right for RTL */
+    }
+    .settings-group .input-group label {
+        width: 100%;
+        text-align: right;
+    }
+    .settings-group .input-group input[type="text"],
+    .settings-group .input-group input[type="password"],
+    .settings-group .input-group input[type="file"],
+    .settings-group .input-group button {
+        width: 100%;
+        margin-top: 5px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .contact-info-display .contact-btn {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Smallest screens adjustments */
+@media (max-width: 480px) {
+    .sidebar {
+        padding: 10px;
+    }
+    .sidebar .logo h1 {
+        font-size: 1.8em;
+    }
+    .sidebar .main-nav ul li a {
+        font-size: 0.85em;
+        padding: 5px 8px;
+    }
+    .content {
+        padding: 10px;
+    }
+    .content-section {
+        padding: 15px;
+    }
+    .auth-section {
+        padding: 15px;
+    }
+}

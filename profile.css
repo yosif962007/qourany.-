@@ -1,0 +1,1017 @@
+/* General Styles */
+body {
+    font-family: 'Cairo', sans-serif;
+    margin: 0;
+    display: flex;
+    min-height: 100vh; /* Use min-height to allow content to push footer down */
+    background-color: #e0e6ed; /* لون خلفية فاتح للوضع النهاري */
+    color: #333;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    position: relative; /* For particles.js and modals */
+    direction: rtl; /* اتجاه الكتابة من اليمين لليسار */
+}
+
+body.dark-mode {
+    background-color: #2c3e50; /* لون خلفية داكن للوضع الليلي */
+    color: #ecf0f1;
+}
+
+/* Particles.js Container (if you choose to use it) */
+#particles-js {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1; /* To place it behind other content */
+}
+
+/* Pop-up Message Styles */
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 3000; /* Higher than everything else */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    min-width: 200px;
+    text-align: center;
+}
+
+.popup.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.popup.success {
+    background-color: #28a745; /* Green */
+}
+
+.popup.error {
+    background-color: #dc3545; /* Red */
+}
+
+.popup.warning {
+    background-color: #ffc107; /* Yellow */
+    color: #333; /* Dark text for warning */
+}
+
+.popup.info {
+    background-color: #17a2b8; /* Blue-ish for info */
+}
+
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #34495e;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+
+body.dark-mode .sidebar {
+    background-color: #2c3e50;
+}
+
+.sidebar .logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sidebar .logo h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #ecf0f1;
+}
+
+.sidebar .nav-links {
+    list-style: none;
+    padding: 0;
+    flex-grow: 1; /* Pushes the footer down */
+}
+
+.sidebar .nav-links .nav-item {
+    margin-bottom: 10px;
+}
+
+.sidebar .nav-links .nav-item a {
+    color: white;
+    text-decoration: none;
+    padding: 12px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    font-size: 1.05em;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .nav-links .nav-item a:hover,
+.sidebar .nav-links .nav-item.active a {
+    background-color: #2980b9;
+}
+
+.sidebar .nav-links .nav-item a i {
+    margin-left: 10px;
+    font-size: 1.2em;
+}
+
+.sidebar-footer {
+    margin-top: auto; /* Pushes to the bottom */
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.sidebar-footer .logout-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.sidebar-footer .logout-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling for main content */
+    position: relative;
+    z-index: 5;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+body.dark-mode header {
+    border-bottom-color: #555;
+}
+
+.welcome-message {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #34495e;
+}
+
+body.dark-mode .welcome-message {
+    color: #ecf0f1;
+}
+
+.user-profile-widget {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    padding: 5px 10px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.user-profile-widget:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .user-profile-widget:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.dropdown-icon {
+    margin-right: 5px;
+    transition: transform 0.3s ease;
+}
+
+.user-profile-widget.active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%; /* Position below the widget */
+    right: 0;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    min-width: 180px;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    padding: 10px 0;
+    margin-top: 10px; /* Space between widget and dropdown */
+}
+
+body.dark-mode .dropdown-menu {
+    background-color: #34495e;
+}
+
+.user-profile-widget.active .dropdown-menu {
+    display: block; /* Show when active */
+}
+
+.dropdown-menu a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+}
+
+body.dark-mode .dropdown-menu a {
+    color: #ecf0f1;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+body.dark-mode .dropdown-menu a:hover {
+    background-color: #4a6c8e;
+}
+
+.dropdown-menu a i {
+    margin-left: 10px;
+}
+
+
+/* Content Area */
+.content-area {
+    flex-grow: 1; /* Allows content area to fill remaining space */
+}
+
+.content-section {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    display: none; /* Hidden by default */
+}
+
+.content-section.active {
+    display: block; /* Show active section */
+}
+
+body.dark-mode .content-section {
+    background-color: #34495e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.content-section h2 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+body.dark-mode .content-section h2 {
+    color: #85c1e9;
+    border-bottom-color: #85c1e9;
+}
+
+/* Form Elements and Buttons */
+input[type="text"],
+input[type="password"],
+input[type="file"],
+textarea,
+select {
+    width: calc(100% - 22px); /* Account for padding and border */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box; /* Ensures padding doesn't add to total width */
+    font-family: 'Cairo', sans-serif; /* Consistent font */
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="password"],
+body.dark-mode input[type="file"],
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #4a6c8e;
+    border-color: #666;
+    color: #ecf0f1;
+}
+
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+    color: #bbb;
+}
+
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-top: 5px;
+    margin-left: 10px; /* Space between buttons */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+.auth-form button:last-child {
+    margin-left: 0; /* No margin-left for the last button in auth form */
+}
+
+.message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: red; /* Default for error messages */
+}
+
+/* Quran Section Specific Styles */
+.quran-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.quran-controls select {
+    flex: 1;
+    min-width: 150px;
+    max-width: 300px; /* Adjust as needed */
+}
+
+.audio-player-container {
+    background-color: #f0f4f7;
+    border: 1px solid #e0e6ed;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .audio-player-container {
+    background-color: #4a6c8e;
+    border-color: #666;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.control-btn {
+    background-color: #28a745; /* Green for play/pause */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0; /* Override default button margin */
+}
+
+.control-btn:hover {
+    background-color: #218838;
+}
+
+.main-play-pause {
+    padding: 12px 25px; /* Slightly larger */
+    font-size: 1.3em;
+}
+
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.time-display {
+    font-size: 0.9em;
+    color: #555;
+}
+
+body.dark-mode .time-display {
+    color: #bbb;
+}
+
+.progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: #ddd;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+body.dark-mode .progress-bar {
+    background: #666;
+}
+
+.progress-bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+}
+
+body.dark-mode .progress-bar::-webkit-slider-thumb {
+    background: #85c1e9;
+}
+
+.player-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.surah-info {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+body.dark-mode .surah-info {
+    color: #ecf0f1;
+}
+
+.download-btn {
+    background-color: #f39c12;
+    padding: 8px 15px;
+    text-decoration: none;
+    margin-left: 0;
+}
+
+.download-btn:hover {
+    background-color: #e67e22;
+}
+
+.quran-display {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    max-height: 400px;
+    overflow-y: auto;
+    font-size: 1.1em;
+    line-height: 1.8;
+    text-align: justify;
+    direction: rtl;
+}
+
+body.dark-mode .quran-display {
+    background-color: #4a6c8e;
+    border-color: #666;
+    color: #ecf0f1;
+}
+
+.quran-display p {
+    margin-bottom: 10px;
+}
+
+.quran-display .bismillah {
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #28a745;
+    font-size: 1.2em;
+}
+
+body.dark-mode .quran-display .bismillah {
+    color: #90ee90;
+}
+
+/* Azkar Section Styles */
+.azkar-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.azkar-cat-btn {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+    flex-grow: 1;
+    max-width: 150px;
+    text-align: center;
+    margin-left: 0;
+}
+
+.azkar-cat-btn:hover,
+.azkar-cat-btn.active {
+    background-color: #4cae4c;
+}
+
+.azkar-display {
+    margin-top: 20px;
+}
+
+.azkar-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+body.dark-mode .azkar-item {
+    background-color: #4a6c8e;
+    border-color: #666;
+}
+
+.azkar-item h3 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+body.dark-mode .azkar-item h3 {
+    color: #85c1e9;
+}
+
+.azkar-item .azkar-text {
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+body.dark-mode .azkar-item .azkar-text {
+    color: #ecf0f1;
+}
+
+.azkar-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.azkar-counter {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #e74c3c;
+    min-width: 40px;
+    text-align: center;
+}
+
+body.dark-mode .azkar-counter {
+    color: #f1948a;
+}
+
+.azkar-count-btn {
+    background-color: #3498db;
+    padding: 8px 15px;
+    font-size: 1em;
+    margin-left: 0;
+}
+
+.azkar-reset-btn {
+    background-color: #e74c3c;
+    padding: 8px 15px;
+    font-size: 1em;
+    margin-left: 0;
+}
+
+/* Hadith Section Styles */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    margin-bottom: 0;
+}
+
+.search-bar button {
+    margin-left: 0;
+}
+
+.hadith-display {
+    margin-top: 20px;
+}
+
+.hadith-item {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+body.dark-mode .hadith-item {
+    background-color: #4a6c8e;
+    border-color: #666;
+}
+
+.hadith-item p {
+    margin: 0 0 10px 0;
+    line-height: 1.6;
+}
+
+.hadith-item .source {
+    font-size: 0.9em;
+    color: #666;
+    text-align: left;
+}
+
+body.dark-mode .hadith-item .source {
+    color: #ccc;
+}
+
+/* Prayer Times Section Styles */
+.prayer-times-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.prayer-times-controls label {
+    font-weight: bold;
+}
+
+.prayer-times-display table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+body.dark-mode .prayer-times-display table {
+    background-color: #4a6c8e;
+}
+
+.prayer-times-display th,
+.prayer-times-display td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+body.dark-mode .prayer-times-display th,
+body.dark-mode .prayer-times-display td {
+    border-color: #666;
+}
+
+.prayer-times-display th {
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+}
+
+body.dark-mode .prayer-times-display th {
+    background-color: #85c1e9;
+    color: #333;
+}
+
+.prayer-times-display tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+body.dark-mode .prayer-times-display tr:nth-child(even) {
+    background-color: #55799a;
+}
+
+/* Settings Section Styles */
+.settings-group {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+body.dark-mode .settings-group {
+    background-color: #4a6c8e;
+    border-color: #666;
+}
+
+.settings-group h3 {
+    color: #3498db;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+body.dark-mode .settings-group h3 {
+    color: #85c1e9;
+}
+
+.settings-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+body.dark-mode .settings-group label {
+    color: #ecf0f1;
+}
+
+/* Problem Report Section Styles */
+.report-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.problem-report-display { /* New class for the display info */
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+body.dark-mode .problem-report-display {
+    background-color: #285a36;
+    color: #c3e6cb;
+    border-color: #3f7d4e;
+}
+
+.contact-link {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+}
+
+.contact-link.whatsapp {
+    background-color: #25d366;
+}
+
+.contact-link.whatsapp:hover {
+    background-color: #1da851;
+}
+
+.contact-link.telegram {
+    background-color: #0088cc;
+}
+
+.contact-link.telegram:hover {
+    background-color: #006699;
+}
+
+/* Modal Styles (Developer Info) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 2000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+    padding: 20px; /* Add some padding for smaller screens */
+    box-sizing: border-box; /* Include padding in width/height */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%; /* Responsive width */
+    max-width: 500px; /* Max width */
+    border-radius: 10px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .modal-content {
+    background-color: #34495e;
+    border-color: #555;
+    color: #ecf0f1;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body.dark-mode .close-button {
+    color: #ecf0f1;
+}
+
+body.dark-mode .close-button:hover,
+body.dark-mode .close-button:focus {
+    color: #bbb;
+}
+
+.telegram-contact-btn {
+    background-color: #0088cc;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.telegram-contact-btn:hover {
+    background-color: #006699;
+}
+
+.small-note {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 10px;
+}
+
+body.dark-mode .small-note {
+    color: #bbb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 15px;
+        flex-direction: row;
+        justify-content: space-around; /* Distribute items */
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 50; /* Ensure sidebar is above main content */
+        border-radius: 10px 10px 0 0; /* Rounded top corners */
+    }
+
+    .sidebar .logo {
+        display: none; /* Hide logo on small screens */
+    }
+
+    .sidebar .nav-links {
+        display: flex; /* Show nav links as horizontal menu */
+        flex-grow: 0;
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+        margin: 0;
+    }
+
+    .sidebar .nav-links .nav-item {
+        margin-bottom: 0;
+        flex: 1; /* Distribute space evenly */
+        text-align: center;
+    }
+
+    .sidebar .nav-links .nav-item a {
+        padding: 8px 5px;
+        font-size: 0.8em;
+        flex-direction: column; /* Icon above text */
+    }
+
+    .sidebar .nav-links .nav-item a i {
+        margin: 0 0 5px 0; /* Space between icon and text */
+        font-size: 1.5em; /* Larger icon */
+    }
+
+    .sidebar-footer {
+        display: none; /* Hide logout button on small screens (can be moved to dropdown) */
+    }
+
+    .main-content {
+        padding: 15px;
+        padding-bottom: 80px; /* Add padding for fixed bottom sidebar */
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .welcome-message {
+        font-size: 1.1em;
+    }
+
+    .user-profile-widget {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .dropdown-menu {
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        min-width: unset;
+        width: 90%; /* Make dropdown wider */
+    }
+
+    .quran-controls,
+    .prayer-times-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .quran-controls select,
+    .prayer-times-controls select {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .modal-content {
+        width: 95%; /* Adjust modal width for smaller screens */
+        margin: 20px auto; /* Re-center with margin */
+    }
+}
