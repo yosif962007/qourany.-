@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>صفحة المستخدم - موقع إسلامي</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div> 
+
+    <audio id="quranAudioPlayer" preload="auto"></audio>
+    <audio id="notificationSound" src="notification.mp3" preload="auto"></audio>
+    <audio id="successSound" src="success.mp3" preload="auto"></audio>
+    <audio id="errorSound" src="error.mp3" preload="auto"></audio>
+    <audio id="warningSound" src="warning.mp3" preload="auto"></audio>
+
+    <div id="popupMsg" class="popup"></div>
+    
+
+    <div class="sidebar">
+        <div class="logo">
+            <h1>إسلامي</h1>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-item active" data-section="quran">
+                <a href="#"><i class="fas fa-quran"></i> القرآن الكريم</a>
+            </li>
+            <li class="nav-item" data-section="azkar">
+                <a href="#"><i class="fas fa-hand-holding-heart"></i> الأذكار</a>
+            </li>
+            <li class="nav-item" data-section="hadith">
+                <a href="#"><i class="fas fa-book-open"></i> الأحاديث النبوية</a>
+            </li>
+            <li class="nav-item" data-section="prayer-times">
+                <a href="#"><i class="fas fa-mosque"></i> مواقيت الصلاة</a>
+            </li>
+            <li class="nav-item" data-section="settings">
+                <a href="#"><i class="fas fa-cog"></i> الإعدادات</a>
+            </li>
+            <li class="nav-item" data-section="problem-report">
+                <a href="#"><i class="fas fa-exclamation-triangle"></i>  التواصل مع المطور   </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" onclick="showDeveloperInfo()"><i class="fas fa-info-circle"></i> معلومات المطور</a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
+            </button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="welcome-message">
+                مرحباً بك، <span id="loggedInUsername">مستخدم</span>!
+            </div>
+            <div class="user-profile-widget" id="userProfileWidget">
+                <img src="default-avatar.png" alt="User Avatar" class="user-avatar" id="widgetAvatar">
+                <span class="user-name" id="widgetUsername">
+                    مستخدم
+                </span>
+                <i class="fas fa-caret-down dropdown-icon"></i>
+                <div class="dropdown-menu">
+                    <a href="#" id="toggleNotificationsBtn" onclick="toggleNotifications()"><i class="fas fa-volume-up"></i> تشغيل الإشعارات</a>
+                    <a href="#" id="darkModeToggle" onclick="toggleMode()"><i class="fas fa-moon"></i> الوضع الليلي</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="content-area">
+            <section id="authSection" class="content-section">
+                <h2>تسجيل الدخول / التسجيل</h2>
+                <input type="text" id="authUsername" placeholder="اسم المستخدم">
+                <input type="password" id="authPassword" placeholder="كلمة المرور">
+                <button onclick="login()">تسجيل الدخول</button>
+                <button onclick="register()">تسجيل</button>
+                <p id="authMessage"></p>
+            </section>
+
+            <section id="quran" class="content-section">
+                <h2>القرآن الكريم</h2>
+                <p>هنا سيتم عرض القرآن مقسمًا إلى سور أو أجزاء، مع خيارات الاستماع والبحث.</p>
+                <div class="quran-controls">
+                    <select id="readerSelect">
+                        <option value="">اختر قارئ</option>
+                    </select>
+                    <select id="surahSelect">
+                        <option value="">اختر سورة</option>
+                    </select>
+                </div>
+
+                <div class="audio-player-container">
+                    <div class="player-controls">
+                        <button id="rewindBtn" class="control-btn"><i class="fas fa-backward"></i> 10 ث</button>
+                        <button id="playPauseBtn" class="control-btn main-play-pause">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button id="forwardBtn" class="control-btn">10 ث <i class="fas fa-forward"></i></button>
+                    </div>
+                    <div class="progress-bar-container">
+                        <span id="currentTimeDisplay" class="time-display">00:00</span>
+                        <input type="range" id="progressBar" class="progress-bar" value="0" min="0" max="100">
+                        <span id="durationDisplay" class="time-display">00:00</span>
+                    </div>
+                    <div class="player-actions">
+                        <span id="currentSurahName" class="surah-info"></span>
+                        <a id="downloadAudioBtn" class="control-btn download-btn" download style="display: none;"><i class="fas fa-download"></i> تحميل</a>
+                    </div>
+                </div>
+                <div id="quranTextDisplay" class="quran-display">
+                    <p>بسم الله الرحمن الرحيم...</p>
+                </div>
+            </section>
+
+            <section id="azkar" class="content-section">
+                <h2>الأذكار</h2>
+                <p>تصفح الأذكار المختلفة (الصباح، المساء، النوم، إلخ) مع عداد إلكتروني.</p>
+                <div class="azkar-categories">
+                    <button class="azkar-cat-btn active" data-azkar-type="morning">أذكار الصباح</button>
+                    <button class="azkar-cat-btn" data-azkar-type="evening">أذكار المساء</button>
+                    <button class="azkar-cat-btn" data-azkar-type="sleep">أذكار النوم</button>
+                    <button class="azkar-cat-btn" data-azkar-type="after_prayer">أذكار بعد الصلاة</button>
+                </div>
+                <div id="azkarDisplay" class="azkar-display">
+                    </div>
+            </section>
+
+            <section id="hadith" class="content-section">
+                <h2>الأحاديث النبوية</h2>
+                <p>ابحث في مجموعة من الأحاديث النبوية الشريفة.</p>
+                <div class="search-bar">
+                    <input type="text" id="hadithSearchInput" placeholder="ابحث عن حديث...">
+                    <button id="searchHadithBtn"><i class="fas fa-search"></i> بحث</button>
+                </div>
+                <div id="hadithDisplay" class="hadith-display">
+                    </div>
+            </section>
+
+            <section id="prayer-times" class="content-section">
+                <h2>مواقيت الصلاة</h2>
+                <p>تعرف على مواقيت الصلاة لمدينتك.</p>
+                <div class="prayer-times-controls">
+                    <select id="citySelect">
+                        <option value="">اختر مدينة</option>
+                        <option value="Cairo">القاهرة</option>
+                        <option value="Alexandria">الإسكندرية</option>
+                        <option value="Giza">الجيزة</option>
+                        <option value="Shubra El-Kheima">شبرا الخيمة</option>
+                        <option value="Port Said">بورسعيد</option>
+                        <option value="Suez">السويس</option>
+                        <option value="Mansoura">المنصورة</option>
+                        <option value="Tanta">طنطا</option>
+                        <option value="Assiut">أسيوط</option>
+                    </select>
+                    <button id="getPrayerTimesBtn"><i class="fas fa-clock"></i> عرض المواقيت</button>
+                </div>
+                <div id="prayerTimesDisplay" class="prayer-times-display">
+                    </div>
+            </section>
+
+            <section id="settings" class="content-section">
+                <h2>الإعدادات</h2>
+                <label for="newUsername">اسم مستخدم جديد:</label>
+                <input type="text" id="newUsername">
+                <button onclick="changeUsername()">تغيير اسم المستخدم</button>
+
+                <label for="newPassword">كلمة مرور جديدة:</label>
+                <input type="password" id="newPassword">
+                <label for="confirmNewPassword">تأكيد كلمة المرور الجديدة:</label>
+                <input type="password" id="confirmNewPassword">
+                <button onclick="changePassword()">تغيير كلمة المرور</button>
+
+                <input type="file" id="avatarUpload" accept="image/*">
+                <button onclick="uploadAvatar()">تغيير الصورة الشخصية</button>
+                <button onclick="resetAvatar()">إعادة تعيين الصورة الافتراضية</button>
+            </section>
+
+            <section id="problem-report" class="content-section">
+                <h2> ضع رسالتك للتواصل مع المطور لا تنس تحديد طريقه الارسال في الاسفل بعد كتابه الرساله  </h2>
+                <label for="contactInfo">رقم الهاتف أو اسم مستخدم التليجرام:</label>
+                <input type="text" id="contactInfo" placeholder="أدخل رقم هاتفك أو يوزر التليجرام" required>
+                <br>
+                <label for="problemDescription">وصف المشكلة:</label>
+                <textarea id="problemDescription" rows="5" placeholder="اكتب مشكلتك هنا..." required></textarea>
+                <button onclick="submitProblemReport()">إرسال البلاغ</button>
+                <div id="problemReportDisplay" class="problem-report-display" style="display: none;">
+                    </div>
+            </section>
+        </div>
+    </div>
+
+    <div id="developerInfoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeDeveloperInfoModal()">&times;</span>
+            <h2>معلومات المطور</h2>
+            <p><strong>الاسم:</strong> يوسف وحيد السداوي</p>
+            <p><strong>البلد:</strong> البحيرة، مركز دمنهور</p>
+            <p><strong>المهنة:</strong> مبرمج صفحات ومواقع، ♡هاوي♡</p>
+            <p><strong>التواصل:</strong></p>
+            <a href="https://t.me/Sarehny_yosif_bot" target="_blank" class="telegram-contact-btn">
+                <i class="fab fa-telegram-plane"></i> تواصل عبر التليجرام
+            </a>
+            <p class="small-note">    `@Sarehny_yosif_bot` اناخادمك الرقمي مستعد لاستقبال الرسائل علي تليجرام هزا ان اردت المحادثه السريه لكن تزكر لن يتم الرد عليك بهزه الطريقه ان ارد ان يتم الرد عليك ارسل بلاغ وضع رسالتك .</p>
+        </div>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="profile.js"></script> </body>
+</html>
